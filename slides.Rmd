@@ -20,7 +20,7 @@ class: font160
 * Translate strategic questions into testable hypotheses
 * Explain differences between good data-driven analysis and traditional data-driven analysis
 * Explain why correlation is not (generally) causation
-* Identify limitiations of working with observational data 
+* Identify limitations of working with observational data 
 * Discuss how experimental data overcomes limitations of observational data 
 * Compute descriptive statistics and visualize experimental data 
 * Use statistical hypothesis testing to analyze experimental data and to answer a strategic question
@@ -175,7 +175,7 @@ class: font140
 3. Randomly divide subjects (people/stores) into groups.
   * Also need to decide on the sample size for each group.
 4. Expose each group to a different treatment.
-5. Measure the response in terms of an outcome varaible(s) for subjects in each group.
+5. Measure the response in terms of an outcome variable(s) for subjects in each group.
   * Outcomes must be chosen in advance!
 6. Compare responses via a (correct) statistical test.
 7. Conclude whether to reject or "fail to reject" your hypothesis based on (6).
@@ -341,7 +341,7 @@ Form null and alternative hypotheses:
 * H0: <!---$\mu_1 - \mu_2 = 0$--->
 * HA: <!---$\mu_1 - \mu_2 \neq 0$--->
 
-Set a level of signifance: $\alpha = 0.05$
+Set a level of significance: $\alpha = 0.05$
 
 Test Statistic (assuming unequal variances): 
 
