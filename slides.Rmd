@@ -272,24 +272,37 @@ There are definitely more ...
 class: font50
 # Descriptive Statistics
 
-<!---
 ```{r, echo = FALSE}
 library(skimr)
 df %>% skim()
 ```
----> 
+
 
 ---
 class: font60
 # Descriptive Statistics By Treatment
 
-<!---
+
 ```{r, echo = FALSE}
 df %>% group_by(promotion) %>% summarize(n_stores = n_distinct(location_id))
 
 df %>% group_by(promotion) %>% skim() %>% yank("numeric")
 ```
---->
+
+---
+# Descriptive Statistics By Treatment
+
+```{r, echo = FALSE}
+df %>%
+    distinct(location_id, .keep_all = TRUE) %>%
+    select(market_size, age_of_store, market_id, promotion) %>%
+    vtable::sumtable(group = "promotion", group.test = TRUE)
+
+```
+
+.center[
+$\implies$ **No evidence of differences in store characteristics across treatments**
+]
 
 ---
 class: font160
@@ -308,7 +321,7 @@ Alternatives include:
 ---
 # (Always) Visualize the Data!
 
-<!---
+
 ```{r, message = FALSE, echo = FALSE}
 library(ggplot2)
 df %>%
@@ -317,7 +330,7 @@ df %>%
   theme_bw() + 
   theme(legend.position = "none")
 ```
----> 
+
 
 ---
 class: font160
@@ -338,8 +351,8 @@ Some alternatives:
 
 Form null and alternative hypotheses:
 
-* H0: <!---$\mu_1 - \mu_2 = 0$--->
-* HA: <!---$\mu_1 - \mu_2 \neq 0$--->
+* H0: $\mu_1 - \mu_2 = 0$
+* HA: $\mu_1 - \mu_2 \neq 0$
 
 Set a level of significance: $\alpha = 0.05$
 
@@ -352,7 +365,6 @@ $$\text{t-stat} = \frac{\mu_1 - \mu_2}{\sqrt{\left( \frac{\hat{\sigma_1}^2}{n_1}
 
 Compare promotion 1 and promotion 2:
 
-<!---
 ```{r, echo = FALSE}
 df2 <- 
   df %>%
@@ -363,7 +375,6 @@ t.test(sales_in_thousands ~ promotion, data = df2, var.equal = TRUE)
 
 In class: How to interpret the output?
 
---->
 
 ---
 # Intermezzo: Type I and Type II errors
@@ -389,7 +400,7 @@ where $i$ is an observation and $j$ is treatment
 
 Null Hypothesis: 
 
-* H0: <!---\tau_1 = \tau_2 = \tau_3 --->
+* H0: $\tau_1$ = $\tau_2$ = $\tau_3$
 
 Assumptions:
 
@@ -414,26 +425,21 @@ class: font160
 
 **Bartlett Test**
 
-<!---
 Null Hypothesis: Variances are equal across treatments
 
 ```{r, echo = FALSE}
 bartlett.test(sales_in_thousands ~ promotion, data = df)
 ```
---->
 
 ---
 class: font160
 # Comparing Means >2 Alternatives 
 
-<!---
 ```{r, echo = FALSE}
 summary(aov(sales_in_thousands ~ promotion, data = df))
 ```
+
 In class: How to interpret this output 
-
----> 
-
 
 ---
 class: font140
@@ -497,7 +503,7 @@ Suggested Citation:
       title={"Digital and Social Media Strategies: Data and Experimentation"},
       author={Lachlan Deer},
       year={2022},
-      url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experiemnts"
+      url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experiments"
 }
 ```
 
