@@ -1,20 +1,19 @@
-# Digital and Social Media Strategies: LECTURE NAME
+# Digital and Social Media Strategies: Data & Experimentation
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![lifecycle](https://img.shields.io/badge/version-2022-red.svg)]()
 
-**Things with `XXX` need updating**
 
 ## Meta-Information
 
 * Module Maintainer: Lachlan Deer (`@lachlandeer`)
-* Course: [Digital and Social Media Strategies](https://tisem-digital-marketing.github.io/XXX-dsms)
+* Course: [Digital and Social Media Strategies](https://github.com/tisem-digital-marketing/2022-dsms)
 * Institute: Dept of Marketing, Tilburg University
-* Current Version: [XXX edition](https://tisem-digital-marketing.github.io/XXXX-dsms)
+* Current Version: 2022 edition
 
 ## Introduction
 
-Slides for the XXX of Digital and Social Media Strategies
+Slides for the Lecture 2 of Digital and Social Media Strategies
 
 Slides are a xaringan presentation and are built to html and pdf using the Snakemake workflow management system.
 I also manage R's package dependencies with `renv`.
@@ -94,17 +93,17 @@ This will install all the packages we need. It may take a while.
 
 ## Suggested Citation (for the Module)
 
-Deer, Lachlan. 2022. Digital and Social Media Strategies: XXX.
+Deer, Lachlan. 2022. Digital and Social Media Strategies: Data & Experimentation.
 Tilburg University.
-url = "https://github.com/tisem-digital-marketing/dsms-lecture-XXX"
+url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experimentation"
 
 ## Suggested Citation (Template)
 
 ```{r, engine='out', eval = FALSE}
 @misc{deerdsms2022,
-      title={"Digital and Social Media Strategies: Lecture Slide Template"},
+      title={"Digital and Social Media Strategies: Lecture 02 - Data & Experimentation"},
       author={Lachlan Deer},
       year={2022},
-      url = "https://github.com/tisem-digital-marketing/dsms-lecture-template"
+      url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experimentation"
 }
 ```
