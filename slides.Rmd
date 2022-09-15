@@ -234,6 +234,9 @@ class: font160
 
 Could we have answered this question another way? How and Why (not)?
 
+* Likely not ...
+  - In class discussion about why
+
 ---
 class: inverse, center, middle
 
@@ -255,18 +258,16 @@ class: font160
 
 > **What descriptive statistics do you want to know?**
 
-<!---
 Things you might want to know*: 
 
 * How many observations in total? 
 * How observations many per treatment?
 * What is the mean/median number of sales per store in each treatment group?
 * What is the standard deviation of the number of sales per store in each treatment group?
-* What is the 
+* Do observable characteristics of stores differ across treatments?
 
 There are definitely more ...
 
---->
 
 ---
 class: font50
@@ -310,13 +311,12 @@ class: font160
 
 > **How to best visualize differences between promotions?**
 
-<!---
 Alternatives include:
 
 * Histogram / barplot
 * Scatterplot 
 * Boxplot
---->
+  - We'll adopt this - its clear insight for this experiment
 
 ---
 # (Always) Visualize the Data!
@@ -338,13 +338,15 @@ class: font160
 
 > **What is the "right" statistical test to run?**
 
-<!---
+
 Some alternatives:
 
-1. Two-sample tests of means
+1. **Two-sample tests of means**
+  - Limit to binary comparisons ... pros and cons
 2. Two-sample test of proportions
-3. ANOVA
---->
+  - We don't have proportions in our data ...
+3. **ANOVA**
+
 
 ---
 # Comparing Means - Two Alternatives
@@ -441,6 +443,8 @@ summary(aov(sales_in_thousands ~ promotion, data = df))
 
 In class: How to interpret this output 
 
+* Look at F-stat & p-value. Assume $\alpha = 0.05$
+
 ---
 class: font140
 # Comparing Means >2 Alternatives 
@@ -449,9 +453,9 @@ Are there differences between treatments?
 
 * Need Tukey's Honestly Significant Difference Test (TukeyHSD)
 * Why not a bunch of two alternative t-tests?
-<!---testing multiple hypotheses--->
+  - testing multiple hypotheses...
+  - issues about what the actual significance level is
 
-<!---
 ```{r, echo = FALSE}
 library(magrittr)
 df %<>%
@@ -461,7 +465,6 @@ TukeyHSD(aov(sales_in_thousands ~ promotion, data = df), "promotion")
 ```
 
 Remark: won't always get such decisive answers
---->
 
 ---
 class: font160
