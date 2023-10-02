@@ -95,7 +95,7 @@ This will install all the packages we need. It may take a while.
 
 Deer, Lachlan. 2023. Digital and Social Media Strategies: Field Experiments.
 Tilburg University.
-url = "https://github.com/tisem-digital-marketing/dsms-lecture-experiments"
+url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 
 ## Suggested Citation (Template)
 
@@ -104,6 +104,6 @@ url = "https://github.com/tisem-digital-marketing/dsms-lecture-experiments"
       title={"Digital and Social Media Strategies: Lecture 4 - Field Experiments"},
       author={Lachlan Deer},
       year={2023},
-      url = "https://github.com/tisem-digital-marketing/dsms-lecture-experiments"
+      url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 }
 ```

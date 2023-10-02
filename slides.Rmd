@@ -828,7 +828,7 @@ Suggested Citation:
       title={"Digital and Social Media Strategies: Field Experiments"},
       author={Lachlan Deer},
       year={2023},
-      url = "https://github.com/tisem-digital-marketing/dsms-lecture-experiments"
+      url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 }
 ```
 
