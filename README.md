@@ -1,4 +1,4 @@
-# Digital and Social Media Strategies: Data & Experimentation
+# Digital and Social Media Strategies: Field Experiments
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![lifecycle](https://img.shields.io/badge/version-2022-red.svg)]()
@@ -7,13 +7,13 @@
 ## Meta-Information
 
 * Module Maintainer: Lachlan Deer (`@lachlandeer`)
-* Course: [Digital and Social Media Strategies](https://github.com/tisem-digital-marketing/2022-dsms)
+* Course: [Digital and Social Media Strategies](https://github.com/tisem-digital-marketing/2023-dsms)
 * Institute: Dept of Marketing, Tilburg University
-* Current Version: 2022 edition
+* Current Version: 2023 edition
 
 ## Introduction
 
-Slides for the Lecture 2 of Digital and Social Media Strategies
+Slides for the Lecture 4 of Digital and Social Media Strategies
 
 Slides are a xaringan presentation and are built to html and pdf using the Snakemake workflow management system.
 I also manage R's package dependencies with `renv`.
@@ -93,17 +93,17 @@ This will install all the packages we need. It may take a while.
 
 ## Suggested Citation (for the Module)
 
-Deer, Lachlan. 2022. Digital and Social Media Strategies: Data & Experimentation.
+Deer, Lachlan. 2023. Digital and Social Media Strategies: Field Experiments.
 Tilburg University.
-url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experimentation"
+url = "https://github.com/tisem-digital-marketing/dsms-lecture-experiments"
 
 ## Suggested Citation (Template)
 
 ```{r, engine='out', eval = FALSE}
-@misc{deerdsms2022,
-      title={"Digital and Social Media Strategies: Lecture 02 - Data & Experimentation"},
+@misc{deerdsms2023,
+      title={"Digital and Social Media Strategies: Lecture 4 - Field Experiments"},
       author={Lachlan Deer},
-      year={2022},
-      url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experimentation"
+      year={2023},
+      url = "https://github.com/tisem-digital-marketing/dsms-lecture-experiments"
 }
 ```
