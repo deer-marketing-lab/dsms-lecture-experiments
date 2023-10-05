@@ -188,6 +188,22 @@ class: font150
 
 ---
 class: font150
+# Potential Issues Encountered
+
+
+* **Lurking Variables**: variable that is not included as an explanatory or response variable in the analysis but can affect the interpretation of relationships between variables.
+  - Also called a confounding variable
+
+<br>
+
+* **Sample Selection Bias**:  Failing to ensure that the sample obtained is representative of the population intended to be analyzed
+
+<br>
+
+* **No Control Group**: Effectiveness compared to no intervention (eg. promotional strategy) 
+
+---
+class: font150
 # Gold Standard Data Driven Marketing
 
 | "Traditional" Data Driven Marketing | Gold Standard Data Driven Marketing        |
@@ -414,7 +430,7 @@ class: font160
 class: font160
 # Descriptive Statistics
 
-,center[
+.center[
 `r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
 **What descriptive statistics do you want to know?**
 ]
@@ -428,9 +444,30 @@ Things you might want to know:
 * What is the standard deviation of the number of sales per store in each treatment group?
 * Do observable characteristics of stores differ across treatments?
 
-There are definitely more ...
+There
+ are definitely more ...
+---> 
 
---->
+---
+class: font160
+# Descriptive Statistics
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**What descriptive statistics do you want to know?**
+]
+
+Things you might want to know: 
+
+* How many observations in total? 
+* How observations many per treatment?
+* What is the mean/median number of sales per store in each treatment group?
+* What is the standard deviation of the number of sales per store in each treatment group?
+* Do observable characteristics of stores differ across treatments?
+
+There
+ are definitely more ...
+
 
 ---
 class: font50
@@ -482,6 +519,21 @@ Alternatives include:
 --->
 
 ---
+class: font160
+# (Always) Visualize the Data!
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to best visualize differences between promotions?**
+]
+
+Alternatives include:
+
+* Histogram / bar plot
+* Scatterplot 
+* Boxplot
+
+---
 # (Always) Visualize the Data!
 
 
@@ -501,8 +553,6 @@ class: font160
 
 > **What is the "right" statistical analysis to run?**
 
-<!---
-Some alternatives:
 
 1. **Two-sample tests of means**
   - Limit to binary comparisons =
@@ -510,7 +560,6 @@ Some alternatives:
   - We don't have proportions in our data
 3. **ANOVA**
 4. **Linear Regression**
---->
 
 ---
 class: font160
@@ -591,12 +640,10 @@ $\implies$ homoskedasticity
 
 Assuming errors are normally distributed, tested via Bartlett's test 
 
-<!---
 * Tested via Bartlett Test.
   * Assumes normality of errors 
 * If non-normal: Brown-Forysth test
 * If non-constant variance: Cochrane's test
---->
 
 ---
 class: font160
@@ -668,7 +715,6 @@ class: font140
 * Why only an estimate of promotion 2 and not also promotion 1?
 * How to interpret this regression?
 
-<!---
 **Answers:** 
 
 * When a constant is included in the regression 1 categorical variable must be left out ...
@@ -678,8 +724,6 @@ class: font140
 * $\beta_0 + \beta_1$ is the average revenue for stores who were in Promotion 2
 
 $\implies$ $\beta_1$ is the average difference in revenue (in 000s) between promotion 2 and promotion 1
-
---->
 
 ---
 class: font140
@@ -720,7 +764,6 @@ class: font140
 * How to interpret this regression?
 * Could we also take the log of the X variable?
 
-<!---
 **Answers**:
 
 * $\beta_0$ is the average log revenue for stores in promotion 1. Not very useful ...
@@ -729,7 +772,6 @@ class: font140
 * We cannot take the log of `Promotion 2`. This variable is either zero (not in promotion 2) or 1 (in promotion 1)
   - ... And log(0) is not defined
   - ... Thats OK, the interpretation is still nice!
----> 
 
 ---
 # Three Promotion Comparison 
@@ -751,7 +793,6 @@ class: font140
 * Why only an estimate of promotion 2 and 3 and not also promotion 1?
 * How to interpret this regression?
 
-<!---
 **Answers**: 
 
 * Now have three categories, Promotion 1, Promotion 2, Promotion 3. Can only estimate two effects since $\beta_0$ captures the average of outcome variable for left out group.
@@ -759,7 +800,6 @@ class: font140
 * $\beta_1$ is the average difference in revenue for stores in Promotion 2 compared to Promotion 1.
 * $\beta_2$ is the average difference in revenue for stores in Promotion 3 compared to Promotion 1.
 * $\beta_3 - \beta_2$ is the average difference in revenue between stores in Promotion 3 compared to Promotion 2.
---->
 
 ---
 # Three Promotion Comparison with Log Y
@@ -781,14 +821,12 @@ class: font140
 
 * How to interpret each coefficient from this regression?
 
-<!---
 **Answers:**
 
 * $\beta_0$ is the average log revenue for stores in Promotion 1
 * $\beta_1$ is the average percentage difference in revenue for stores in Promotion 2 compared to Promotion 1.
 * $\beta_2$ is the average percentage difference in revenue for stores in Promotion 3 compared to Promotion 1.
 * $\beta_3 - \beta_2$ is the average percentage difference in revenue between stores in Promotion 3 compared to Promotion 2.
---->
 
 
 ---
@@ -797,6 +835,7 @@ class: inverse, center, middle
 # Recap
 
 ---
+class: font160
 # Recap
 
 * Well designed experiments deliver causal effects of marketing interventions
