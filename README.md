@@ -1,19 +1,19 @@
 # Digital and Social Media Strategies: Field Experiments
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![lifecycle](https://img.shields.io/badge/version-2022-red.svg)]()
+[![lifecycle](https://img.shields.io/badge/version-2024-red.svg)]()
 
 
 ## Meta-Information
 
 * Module Maintainer: Lachlan Deer (`@lachlandeer`)
-* Course: [Digital and Social Media Strategies](https://github.com/tisem-digital-marketing/2023-dsms)
+* Course: [Digital and Social Media Strategies](https://github.com/tisem-digital-marketing/)
 * Institute: Dept of Marketing, Tilburg University
-* Current Version: 2023 edition
+* Current Version: 2024 edition
 
 ## Introduction
 
-Slides for the Lecture 4 of Digital and Social Media Strategies
+Slides for the Lecture 3 of Digital and Social Media Strategies
 
 Slides are a xaringan presentation and are built to html and pdf using the Snakemake workflow management system.
 I also manage R's package dependencies with `renv`.
@@ -93,7 +93,7 @@ This will install all the packages we need. It may take a while.
 
 ## Suggested Citation (for the Module)
 
-Deer, Lachlan. 2023. Digital and Social Media Strategies: Field Experiments.
+Deer, Lachlan. 2024. Digital and Social Media Strategies: Lecture 3 - Field Experiments.
 Tilburg University.
 url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 
@@ -101,9 +101,9 @@ url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 
 ```{r, engine='out', eval = FALSE}
 @misc{deerdsms2023,
-      title={"Digital and Social Media Strategies: Lecture 4 - Field Experiments"},
+      title={"Digital and Social Media Strategies: Lecture 3 - Field Experiments"},
       author={Lachlan Deer},
-      year={2023},
+      year={2024},
       url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 }
 ```
