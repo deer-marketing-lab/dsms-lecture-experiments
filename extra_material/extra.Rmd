@@ -1,0 +1,449 @@
+# Analyzing Field Experiment Data
+
+---
+class: font150
+# The Burger Promotion Problem Redux 
+
+```{r, echo = FALSE, fig.align = "center", out.width="50%"}
+url <- "https://cdn.vox-cdn.com/thumbor/4mAGUkdlOUBL_INj2X2uZ53BR8U=/0x0:1100x825/1200x800/filters:focal(0x0:1100x825)/cdn.vox-cdn.com/uploads/chorus_image/image/46157824/american-burgers.0.0.jpg"
+knitr::include_graphics(url)
+```
+
+* New burger to be **introduced to all** stores 
+* **Three** different **promotion strategies** used (promo 1, 2 or 3)
+* **Managers care about sales**
+* No access to previous sales data 
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**Which promotion strategy is the most effective?**
+]
+
+---
+# The Data
+
+```{r, echo = FALSE, message = FALSE}
+library(readr)
+library(dplyr)
+library(janitor)
+
+df <- read_csv("data/WA_Marketing-Campaign.csv") %>%
+  clean_names() 
+  
+df %>%
+  head(15)
+```
+
+---
+class: font160
+# Steps to Analyze Experimental Data 
+
+<br>
+
+1. Build an understanding of the data structure 
+2. Compute some descriptive statistics 
+3. Visualize the Data
+4. Run (the correct) statistical test
+5. (Use test results to inform decision making)
+
+---
+class: font160
+# Descriptive Statistics
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**What descriptive statistics do you want to know?**
+]
+
+<!---
+Things you might want to know: 
+
+* How many observations in total? 
+* How observations many per treatment?
+* What is the mean/median number of sales per store in each treatment group?
+* What is the standard deviation of the number of sales per store in each treatment group?
+* Do observable characteristics of stores differ across treatments?
+
+There
+ are definitely more ...
+---> 
+
+---
+class: font160
+# Descriptive Statistics
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**What descriptive statistics do you want to know?**
+]
+
+Things you might want to know: 
+
+* How many observations in total? 
+* How observations many per treatment?
+* What is the mean/median number of sales per store in each treatment group?
+* What is the standard deviation of the number of sales per store in each treatment group?
+* Do observable characteristics of stores differ across treatments?
+
+There
+ are definitely more ...
+
+
+---
+class: font50
+# Descriptive Statistics
+
+```{r, echo = FALSE}
+library(skimr)
+df %>% skim()
+```
+
+---
+# Descriptive Statistics By Treatment
+
+
+```{r, echo = FALSE}
+df %>% group_by(promotion) %>% summarize(n_stores = n_distinct(location_id))
+```
+
+---
+# Descriptive Statistics By Treatment
+
+```{r, echo = FALSE}
+df %>%
+    distinct(location_id, .keep_all = TRUE) %>%
+    select(market_size, age_of_store, market_id, promotion) %>%
+    vtable::sumtable(group = "promotion", group.test = TRUE)
+
+```
+
+.center[
+$\implies$ **No evidence of differences in store characteristics across treatments**
+]
+
+---
+class: font160
+# (Always) Visualize the Data!
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to best visualize differences between promotions?**
+]
+
+<!---
+Alternatives include:
+
+* Histogram / bar plot
+* Scatterplot 
+* Boxplot
+--->
+
+---
+class: font160
+# (Always) Visualize the Data!
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to best visualize differences between promotions?**
+]
+
+Alternatives include:
+
+* Histogram / bar plot
+* Scatterplot 
+* Boxplot
+
+---
+# (Always) Visualize the Data!
+
+
+```{r, message = FALSE, echo = FALSE}
+library(ggplot2)
+df %>%
+  ggplot() +
+  geom_boxplot(aes(x = as.factor(promotion), y =sales_in_thousands, fill = promotion)) + 
+  theme_bw() + 
+  theme(legend.position = "none")
+```
+
+
+---
+class: font160
+# A Statistical Test
+
+> **What is the "right" statistical analysis to run?**
+
+
+1. **Two-sample tests of means**
+  - Limit to binary comparisons =
+2. Two-sample test of proportions
+  - We don't have proportions in our data
+3. **ANOVA**
+4. **Linear Regression**
+
+---
+class: font160
+# Comparing Means - Two Alternatives
+
+Form null and alternative hypotheses:
+
+* H0: $\mu_1 - \mu_2 = 0$
+* HA: $\mu_1 - \mu_2 \neq 0$
+
+Set a level of significance: $\alpha = 0.05$
+
+Test Statistic (assuming unequal variances): 
+
+$$\text{t-stat} = \frac{\hat{\mu}_1 - \hat{\mu}_2}{\sqrt{\left( \frac{\hat{\sigma_1}^2}{n_1} + \frac{\hat{\sigma_2}^2}{n_2} \right)}}$$
+
+---
+class: font160
+# Comparing Means - Two Alternatives
+
+.center[Compare promotion 1 and promotion 2]
+
+<br>
+
+```{r, echo = FALSE}
+library(infer)
+df2 <- 
+  df %>%
+  filter(promotion != 3)
+
+t_test(df2, sales_in_thousands ~ promotion, var.equal = TRUE)
+```
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to interpret the output?**
+
+
+---
+# Intermezzo: Type I and Type II errors
+
+
+```{r, echo = FALSE, fig.align = "center", out.width="65%"}
+url <- "https://miro.medium.com/max/852/1*iM4wTvvEgVmFVqbaip2--Q.png"
+knitr::include_graphics(url)
+```
+
+In experiments at large tech companies usually $\beta = 0.8$
+
+---
+class: font150
+# Comparing Means >2 Alternatives 
+
+What if we want to compare all treatments?
+
+Need ANOVA:
+
+$$y_{ij} = \mu + \tau_j + \varepsilon_{ij}$$
+
+where $i$ is an observation and $j$ is treatment
+
+Null Hypothesis: 
+
+* H0: $\tau_1$ = $\tau_2$ = $\tau_3$
+
+---
+class: font160
+# ANOVA: Some details
+
+Assumptions:
+
+1. Independence of Errors 
+2. Constant Variance
+3. Normality of errors 
+
+Of these, (2) is the most important. 
+
+$\implies$ homoskedasticity
+
+Assuming errors are normally distributed, tested via Bartlett's test 
+
+* Tested via Bartlett Test.
+  * Assumes normality of errors 
+* If non-normal: Brown-Forysth test
+* If non-constant variance: Cochrane's test
+
+---
+class: font160
+# Comparing Means >2 Alternatives 
+
+**Bartlett Test**
+
+Null Hypothesis: Variances are equal across treatments
+
+```{r, echo = FALSE}
+bartlett.test(sales_in_thousands ~ promotion, data = df)
+```
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to interpret the output?**
+
+---
+class: font160
+# Comparing Means >2 Alternatives 
+
+```{r, echo = FALSE}
+summary(aov(sales_in_thousands ~ promotion, data = df))
+```
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to interpret the output?**
+
+---
+class: font140
+# Comparing Means >2 Alternatives 
+
+Are there **differences between treatments**?
+
+* Tukey's Honestly Significant Difference Test
+  * Not a bunch of pairwise binary tests
+  * Why?  
+    - Testing multiple hypotheses...
+    - Issues about what the *actual* significance level is 
+
+
+```{r, echo = FALSE}
+library(magrittr)
+df %<>%
+  mutate(promotion= as.factor(promotion))
+
+TukeyHSD(aov(sales_in_thousands ~ promotion, data = df), "promotion")
+```
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**How to interpret the output?**
+
+---
+class: font140
+# Regression: Two Promotion Comparison 
+
+$$\text{Sales}_i = \beta_0 + \beta_1 \text{Promotion Type 2} + \varepsilon_i$$
+
+```{r, echo = FALSE}
+simple_reg <- lm(sales_in_thousands ~ as.factor(promotion), data = df2)
+summary(simple_reg)
+```
+
+---
+class: font140
+# Two Promotion Comparison 
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**Questions:**
+
+* Why only an estimate of promotion 2 and not also promotion 1?
+* How to interpret this regression?
+
+**Answers:** 
+
+* When a constant is included in the regression 1 categorical variable must be left out ...
+  - We have two categories since we have two treatments (promotion 1 and promotion 2)
+
+* $\beta_0$ is the average revenue for stores who were in Promotion 1
+* $\beta_0 + \beta_1$ is the average revenue for stores who were in Promotion 2
+
+$\implies$ $\beta_1$ is the average difference in revenue (in 000s) between promotion 2 and promotion 1
+
+---
+class: font140
+# Causal Interpretations and Experiments 
+
+**Regression estimates from analysis of experiments have causal interpretations**
+
+Why? 
+
+* Counterfactual outcomes - compare to an alternative promotion
+* "As good as random" assignment to treatments - lurking variables won't trouble us 
+* No sample selection bias ... analyst picked the sample to match the group they care about
+  
+Regression estimates from experiments allow us to:
+
+* Test whether treatments have effects 
+  * Same as ANOVA or a t-test
+* Estimate a magnitude of the effect sizes (and standard errors)
+  * Which our t-test and ANOVA didn't
+
+---
+# Two Promotion Comparison with log Y
+
+$$log(\text{Sales}_i) = \beta_0 + \beta_1 \text{Promotion Type 2} + \varepsilon_i$$
+
+```{r, echo = FALSE}
+simple_reg <- lm(log(sales_in_thousands) ~ as.factor(promotion), data = df2)
+summary(simple_reg)
+```
+
+---
+class: font140
+# Two Promotion Comparison with log Y
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**Questions**:
+
+* How to interpret this regression?
+* Could we also take the log of the X variable?
+
+**Answers**:
+
+* $\beta_0$ is the average log revenue for stores in promotion 1. Not very useful ...
+* $\beta$ is (approximately) the average percentage difference in revenue between promotion 2 and promotion 1. 
+  * $\exp{\hat{\beta_1}} - 1$ is the exact percentage difference...
+* We cannot take the log of `Promotion 2`. This variable is either zero (not in promotion 2) or 1 (in promotion 1)
+  - ... And log(0) is not defined
+  - ... Thats OK, the interpretation is still nice!
+
+---
+# Three Promotion Comparison 
+
+$$\text{Sales}_i = \beta_0 + \beta_1 \text{Promotion Type 2} + \beta_2 \text{Promotion Type 3} + \varepsilon_i$$
+
+```{r, echo = FALSE}
+full_reg <- lm(sales_in_thousands ~ as.factor(promotion), data = df)
+summary(full_reg)
+```
+
+---
+class: font140
+# Three Promotion Comparison 
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**Questions**:
+
+* Why only an estimate of promotion 2 and 3 and not also promotion 1?
+* How to interpret this regression?
+
+**Answers**: 
+
+* Now have three categories, Promotion 1, Promotion 2, Promotion 3. Can only estimate two effects since $\beta_0$ captures the average of outcome variable for left out group.
+* $\beta_0$ is the average revenue for stores in Promotion 1
+* $\beta_1$ is the average difference in revenue for stores in Promotion 2 compared to Promotion 1.
+* $\beta_2$ is the average difference in revenue for stores in Promotion 3 compared to Promotion 1.
+* $\beta_3 - \beta_2$ is the average difference in revenue between stores in Promotion 3 compared to Promotion 2.
+
+---
+# Three Promotion Comparison with Log Y
+
+
+$$\log(\text{Sales}_i) = \beta_0 + \beta_1 \text{Promotion Type 2} + \beta_2 \text{Promotion Type 3} + \varepsilon_i$$
+
+```{r, echo = FALSE}
+full_reg <- lm(log(sales_in_thousands) ~ as.factor(promotion), data = df)
+summary(full_reg)
+```
+
+---
+class: font140
+# Three Promotion Comparison with Log Y
+
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+**Questions**:
+
+* How to interpret each coefficient from this regression?
+
+**Answers:**
+
+* $\beta_0$ is the average log revenue for stores in Promotion 1
+* $\beta_1$ is the average percentage difference in revenue for stores in Promotion 2 compared to Promotion 1.
+* $\beta_2$ is the average percentage difference in revenue for stores in Promotion 3 compared to Promotion 1.
+* $\beta_3 - \beta_2$ is the average percentage difference in revenue between stores in Promotion 3 compared to Promotion 2.

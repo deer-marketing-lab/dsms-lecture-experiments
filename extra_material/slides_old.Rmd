@@ -1,0 +1,520 @@
+---
+title: "Data & Experimentation"
+subtitle: "Digital and Social Media Strategies"
+author: "Lachlan Deer"
+institute: "Tilburg University"
+date: "Updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, metropolis, metropolis-fonts]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: font160
+
+# Learning Goals for this Week
+
+* Translate strategic questions into testable hypotheses
+* Explain differences between good data-driven analysis and traditional data-driven analysis
+* Explain why correlation is not (generally) causation
+* Identify limitations of working with observational data 
+* Discuss how experimental data overcomes limitations of observational data 
+* Compute descriptive statistics and visualize experimental data 
+* Use statistical hypothesis testing to analyze experimental data and to answer a strategic question
+
+---
+class: inverse, center, middle
+
+# Digital Marketing Analytics
+
+---
+# The Data Deluge
+
+```{r, echo = FALSE, fig.align = "center", out.width="80%"}
+url <- "https://www.economist.com/sites/default/files/images/articles/migrated/201009LDD001.jpg"
+knitr::include_graphics(url)
+```
+
+.right[
+Source: [the Economist (2010)](https://www.economist.com/leaders/2010/02/25/the-data-deluge)
+]
+
+
+---
+class: font150
+# "New" Data Driven Marketing
+
+| "Traditional" Data Driven Marketing | Gold Standard Data Driven Marketing        |
+|-------------------------------------|--------------------------------------------|
+| Anchor on data that is available    | Anchor on a decision that needs to be made |
+| Finds a purpose for data            | Finds data for a purpose                   |
+| Starts from what is known           | Start from what is unknown                 |
+| Empowers data analysts/scientists   | Empowers decision making                   |
+
+
+adapted from De Lange and Putoni (2020)
+
+
+---
+class: font150
+# Causal Data Driven Marketing
+
+> What is the impact of an marketing intervention (X) on an outcome (Y)
+
+1. Hard to evaluate
+2. Need to compute counterfactuals
+3. Challenge: same person cannot both get treatment and not get treatment
+
+---
+# Correlation vs Causation 
+
+```{r, echo = FALSE, fig.align = "center", out.width="80%"}
+url <- "https://i.natgeofe.com/n/c7b6976e-ffbb-4d27-bad9-68332f9e289c/chart-copy_16x9.jpeg?w=636&h=358"
+knitr::include_graphics(url)
+```
+
+.right[
+Source: [National Geographic (2015)](https://www.nationalgeographic.com/science/article/nick-cage-movies-vs-drownings-and-more-strange-but-spurious-correlations)
+]
+
+---
+# Correlation vs Causation 
+
+```{r, echo = FALSE, fig.align = "center", out.width="80%"}
+url <- "https://imgs.xkcd.com/comics/correlation.png"
+knitr::include_graphics(url)
+```
+
+.right[
+Source: [Xkcd (undated)](https://xkcd.com/552/)
+]
+
+---
+class: font130
+# Causation and the Rise of Experiments I
+
+(Potential) Issues with Observational Data:
+
+1. **Lurking Variables**: variable that is not included as an explanatory or response variable in the analysis but can affect the interpretation of relationships between variables.
+  - Also called a confounding variable
+2. **Sample Selection Bias**:  Failing to ensure that the sample obtained is representative of the population intended to be analyzed
+
+This does not mean that observational data has no use ...
+
+* There are ways to get causal effects in certain situations with specific assumptions
+  - Beyond the scope of this class 
+* Using observational data for descriptive purposes has been shown to improve decision making 
+  - See [Berman and Israeli (2022)](https://doi.org/10.1287/mksc.2022.1352)
+
+---
+class: font140
+# Causation and the Rise of Experiments II
+
+> **Experiment**: statistical test where a hypothesis is subjected to data produced by a specific procedure in which some variable thought to affect an outcome is deliberately manipulated
+
+Overcomes:
+
+1. Lurking Variables: All lurking variables are uncorrelated with the experiment
+2. Selection Bias: Analyst chooses the sample to match the population of interest
+
+Remark: Experiments are often also called A/B tests or A/B/n tests.
+
+---
+class: font140
+# Experiments Deliver Causal Effects 
+
+Big Three of causal inference:
+
+1. **When X changes, Y also changes.**
+  * If X changes and Y doesn't change this is also useful information
+2. **X happened before Y.**
+  * If X happens after Y cannot assert that X causes Y.
+3. **Nothing else besides X changed systematically**
+  * If W and Z change at the same time X changes (or often enough) cannot rule out that W and Z are causing change in Y.
+  * **Randomly** allocating subjects to an experiment *can* rule this out
+
+---
+# Most Experiments Fail
+
+**Main Point of an experiment**:  test some idea 
+
+* *not* proven something 
+
+$\implies$ most experiments "fail"
+
+* i.e. change does not lead to an improvement
+
+**This is a good thing**
+
+* Bad ideas fail quickly
+* Investment is typically small ...
+* ... as are the sample sizes
+
+But failed experiments are not normally what one sees ...
+
+* In publications, or 
+* When talking to a firm 
+
+---
+class: inverse, center, middle
+
+# Experiments 101
+
+
+---
+class: font140
+# Seven Steps of an Experiment
+
+1. Write down a testable hypothesis.
+  * Generally advocate a "no change" hypothesis
+2. Decide on two or more treatments that might impact the outcome variable(s) of interest.
+  * Generally, include a control treatment where nothing is changed to use as a baseline
+3. Randomly divide subjects (people/stores) into groups.
+  * Also need to decide on the sample size for each group.
+4. Expose each group to a different treatment.
+5. Measure the response in terms of an outcome variable(s) for subjects in each group.
+  * Outcomes must be chosen in advance!
+6. Compare responses via a (correct) statistical test.
+7. Conclude whether to reject or "fail to reject" your hypothesis based on (6).
+
+
+* Good experiments have a hypothesis that answers a **strategic question** for a business
+
+---
+class: font120
+# Example: Promoting a New Product 
+
+```{r, echo = FALSE, fig.align = "center", out.width="80%"}
+url <- "https://cdn.vox-cdn.com/thumbor/4mAGUkdlOUBL_INj2X2uZ53BR8U=/0x0:1100x825/1200x800/filters:focal(0x0:1100x825)/cdn.vox-cdn.com/uploads/chorus_image/image/46157824/american-burgers.0.0.jpg"
+knitr::include_graphics(url)
+```
+
+* New fast food item introduced to all stores 
+* Three different promotions used, managers care about sales 
+* Promotions randomly allocated to stores
+* Different promotion strategies may have different effectiveness  
+
+This will be our working example in what follows...
+
+---
+# The Data
+
+```{r, echo = FALSE, message = FALSE}
+library(readr)
+library(dplyr)
+library(janitor)
+
+df <- read_csv("data/WA_Marketing-Campaign.csv") %>%
+  clean_names() 
+  
+df %>%
+  head(15)
+```
+
+---
+class: font140
+# Unpacking the Experiment 
+
+In class discussion:
+
+* What is/are the outcome variable(s) of interest?
+* What point in the conversion funnel can we measure with the experiment?
+* What is the control group?
+* What comparisons should we make? What are the testable hypotheses for each?
+
+---
+class: font160
+
+# From Data to Decisions
+
+> What is the strategic question this experiment can answer? 
+
+Could we have answered this question another way? How and Why (not)?
+
+* Likely not ...
+  - In class discussion about why
+
+---
+class: inverse, center, middle
+
+# Analyzing Experimental Data
+
+---
+class: font160
+# Steps to Analyze Experimental Data 
+
+1. Build an understanding of the data structure 
+2. Compute some descriptive statistics 
+3. Visualize the Data
+4. Run (the correct) statistical test
+5. (Use test results to inform decision making)
+
+---
+class: font160
+# Descriptive Statistics
+
+> **What descriptive statistics do you want to know?**
+
+Things you might want to know*: 
+
+* How many observations in total? 
+* How observations many per treatment?
+* What is the mean/median number of sales per store in each treatment group?
+* What is the standard deviation of the number of sales per store in each treatment group?
+* Do observable characteristics of stores differ across treatments?
+
+There are definitely more ...
+
+
+---
+class: font50
+# Descriptive Statistics
+
+```{r, echo = FALSE}
+library(skimr)
+df %>% skim()
+```
+
+
+---
+class: font60
+# Descriptive Statistics By Treatment
+
+
+```{r, echo = FALSE}
+df %>% group_by(promotion) %>% summarize(n_stores = n_distinct(location_id))
+
+df %>% group_by(promotion) %>% skim() %>% yank("numeric")
+```
+
+---
+# Descriptive Statistics By Treatment
+
+```{r, echo = FALSE}
+df %>%
+    distinct(location_id, .keep_all = TRUE) %>%
+    select(market_size, age_of_store, market_id, promotion) %>%
+    vtable::sumtable(group = "promotion", group.test = TRUE)
+
+```
+
+.center[
+$\implies$ **No evidence of differences in store characteristics across treatments**
+]
+
+---
+class: font160
+# (Always) Visualize the Data!
+
+> **How to best visualize differences between promotions?**
+
+Alternatives include:
+
+* Histogram / barplot
+* Scatterplot 
+* Boxplot
+  - We'll adopt this - its clear insight for this experiment
+
+---
+# (Always) Visualize the Data!
+
+
+```{r, message = FALSE, echo = FALSE}
+library(ggplot2)
+df %>%
+  ggplot() +
+  geom_boxplot(aes(x = as.factor(promotion), y =sales_in_thousands, fill = promotion)) + 
+  theme_bw() + 
+  theme(legend.position = "none")
+```
+
+
+---
+class: font160
+# A Statistical Test
+
+> **What is the "right" statistical test to run?**
+
+
+Some alternatives:
+
+1. **Two-sample tests of means**
+  - Limit to binary comparisons ... pros and cons
+2. Two-sample test of proportions
+  - We don't have proportions in our data ...
+3. **ANOVA**
+4. **Linear Regression**
+
+
+---
+# Comparing Means - Two Alternatives
+
+Form null and alternative hypotheses:
+
+* H0: $\mu_1 - \mu_2 = 0$
+* HA: $\mu_1 - \mu_2 \neq 0$
+
+Set a level of significance: $\alpha = 0.05$
+
+Test Statistic (assuming unequal variances): 
+
+$$\text{t-stat} = \frac{\mu_1 - \mu_2}{\sqrt{\left( \frac{\hat{\sigma_1}^2}{n_1} + \frac{\hat{\sigma_2}^2}{n_2} \right)}}$$
+
+---
+# Comparing Means - Two Alternatives
+
+Compare promotion 1 and promotion 2:
+
+```{r, echo = FALSE}
+df2 <- 
+  df %>%
+  filter(promotion != 3)
+
+t.test(sales_in_thousands ~ promotion, data = df2, var.equal = TRUE)
+```
+
+In class: How to interpret the output?
+
+
+---
+# Intermezzo: Type I and Type II errors
+
+
+```{r, echo = FALSE, fig.align = "center", out.width="80%"}
+url <- "https://miro.medium.com/max/852/1*iM4wTvvEgVmFVqbaip2--Q.png"
+knitr::include_graphics(url)
+```
+
+In experiments at large tech companies usually $\beta = 0.8$
+
+---
+# Comparing Means >2 Alternatives 
+
+What if we want to compare all treatments?
+
+Need ANOVA:
+
+$$y_{ij} = \mu + \tau_j + \varepsilon_{ij}$$
+
+where $i$ is an observation and $j$ is treatment
+
+Null Hypothesis: 
+
+* H0: $\tau_1$ = $\tau_2$ = $\tau_3$
+
+Assumptions:
+
+1. Independence of Errors 
+2. Constant Variance
+3. Normality of errors 
+
+Of these, (2) is the most important. 
+
+* Assuming errors are normally distributed, tested via Bartlett's test 
+
+<!---
+* Tested via Bartlett Test.
+  * Assumes normality of errors 
+* If non-normal: Brown-Forysth test
+* If non-constant variance: Cochrane's test
+--->
+
+---
+class: font160
+# Comparing Means >2 Alternatives 
+
+**Bartlett Test**
+
+Null Hypothesis: Variances are equal across treatments
+
+```{r, echo = FALSE}
+bartlett.test(sales_in_thousands ~ promotion, data = df)
+```
+
+---
+class: font160
+# Comparing Means >2 Alternatives 
+
+```{r, echo = FALSE}
+summary(aov(sales_in_thousands ~ promotion, data = df))
+```
+
+In class: How to interpret this output 
+
+* Look at F-stat & p-value. Assume $\alpha = 0.05$
+
+---
+class: font140
+# Comparing Means >2 Alternatives 
+
+Are there differences between treatments?
+
+* Need Tukey's Honestly Significant Difference Test (TukeyHSD)
+* Why not a bunch of two alternative t-tests?
+  - testing multiple hypotheses...
+  - issues about what the actual significance level is
+
+```{r, echo = FALSE}
+library(magrittr)
+df %<>%
+  mutate(promotion= as.factor(promotion))
+
+TukeyHSD(aov(sales_in_thousands ~ promotion, data = df), "promotion")
+```
+
+Remark: won't always get such decisive answers
+
+---
+class: font160
+# Tips on Presenting Experimental Findings
+
+1. Know your audience 
+2. Summarize the experiment 
+3. Provide context
+4. Lead with a recommendation
+5. Support with analysis
+6. Use graphs 
+7. Check the (graph) labels!
+
+---
+class: inverse, center, middle
+
+# Recap
+
+---
+class: font160
+# Recap
+
+* (Existing) Observational data often does not help to answer a new strategic question 
+  * ... particularly if we want *causal effects* 
+* Well designed experiments can by ...
+  - Eliminating "lurking variables" and sample selection bias
+  - ... An allow us to get *causal* estimates
+
+* 7 steps in the experimental method
+* Analyzing data from an experiment involves descriptive statistics, data visualization and (statistical) hypothesis tests
+
+---
+# License & Citation
+
+Suggested Citation:
+
+```{r, engine='out', eval = FALSE}
+@misc{deerdsms2022,
+      title={"Digital and Social Media Strategies: Data and Experimentation"},
+      author={Lachlan Deer},
+      year={2022},
+      url = "https://github.com/tisem-digital-marketing/dsms-lecture-02-experiments"
+}
+```
+
+<p style="text-align:center;"><img src="https://www.tilburguniversity.edu/sites/default/files/styles/large_width/public/image/Logo%20OSCT.png?itok=PqU9mw_l" alt="Logo" width = "200"></p>
+
+This course adheres to the principles of the Open Science Community of Tilburg University. 
+This initiative advocates for transparency and accessibility in research and teaching to all levels of society and thus creating more accountability and impact.
+
+<p style="text-align:center;"><img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Logo" width = "100"></p>
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
