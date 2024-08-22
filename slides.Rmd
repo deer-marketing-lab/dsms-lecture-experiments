@@ -29,45 +29,36 @@ class: inverse, center, middle
 # Preliminaries
 
 ---
-class: clear 
-
-
-```{r, echo = FALSE, fig.align = "center", out.width="55%"}
-url <- "https://media.makeameme.org/created/and-were-back-5c6cdb.jpg"
-knitr::include_graphics(url)
-```
-
----
-class: font150
-# Schedule Updates
-
-.center[.font130[**We've missed the last two weeks of lectures**]]
-
-<br>
-
-We're going to **catch up** one of them ...
-
-* **This week, on Friday at 16:45**
-* (not the best time of the week)
-* Needed to give you some context for the group assignment
-
-We're going to drop one lecture from the schedule 
-
-* Still deciding what that will be ... 
-* It will be one of the ones "near the end" of the class
-
----
 class: font160
 # Where Are We Now? 
 
+```{r, echo = FALSE, fig.align = "center", out.width="25%"}
+url <- "https://png.pngtree.com/png-clipart/20211024/original/pngtree-pile-of-cartoonish-cute-doodle-theme-books-png-image_6871556.png"
+knitr::include_graphics(url)
+```
+
 Course Themes:
 
-1. Classical Approaches to Measuring Advertising Effects
-2. **Modern Evaluation of Digital Advertising Effects**
+1. **Measuring Advertising Effects**
+  * `r icons:::icon_style(icons::fontawesome("check", style = "solid"), scale = 1)` Attribution Models
+  * `r icons:::icon_style(icons::fontawesome("check", style = "solid"), scale = 1)` Media Mix Models
+  * `r icons:::icon_style(icons::fontawesome("bullseye", style = "solid"), scale = 1)` Incrementality Experiments
 2. User Generated Content & Social Media
-3. Email & Mobile Marketing
-4. Issues in (Massive) Online Marketplaces
-5. Impact of Privacy Regulations 
+
+---
+class: font160
+# Our learning journey... 
+
+*Previously*: Marketing Attribution Rules & Media Mix Modelling
+
+* Relies on *observational* data 
+
+**Today**: **Intro to Field Experiments** 
+
+* What are they? Why we run them? How to analyse the data?
+* Abstract away from Digital Markets for generalizability
+
+*Next Week*: Experiments with Online Display Advertising & Search Engine Marketing
 
 ---
 # Wasteful Advertising Expenditures? 
@@ -99,22 +90,10 @@ $$
 ROI = \frac{\text{incremental profit due to advertising} - \text{cost of advertising}}{\text{cost of advertising}}
 $$
 
----
-class: font160
-# Our learning journey... 
+`r icons:::icon_style(icons::academicons("open-data"), scale = 1)` Our challenge so far: **incrementality**
 
-.center[.font120[Popular techniques for estimating the incremental sales due to advertising]]
+* Is what we have estimated so far the 'true' effect of advertising?
 
-*Previously*: Marketing Attribution Rules & Media Mix Modelling
-
-* Relies on *observational* data 
-
-**Today**: **Intro to Field Experiments** 
-
-* What are they? Why we run them? How to analyse the data?
-* Abstract away from Digital Markets for generalizability
-
-*Friday*: Experiments with Online Display Advertising
 
 ---
 class: inverse, center, middle
@@ -202,6 +181,8 @@ class: font150
 
 * **No Control Group**: Effectiveness compared to no intervention (eg. promotional strategy) 
 
+**Remark:** These problems also plagued our interpretations of attribution models and media mix models
+
 ---
 class: font150
 # Gold Standard Data Driven Marketing
@@ -277,12 +258,14 @@ Three identifiable aspects:
 
 <br>
 
-1. Comparison of outcomes between treatment and control
+1. Comparison of outcomes between treatment and control 
 2. Assignment of subjects is to groups is done through a randomization device
 3. Manipulation of treatment is under control of a researcher / analyst
 
 
 .font70[Dunning, T. (2012). Natural experiments in the social sciences: A design-based approach. Cambridge: Cambridge University Press.]
+
+When done correctly: isolates the **incremental effect** of the treatment on a outcome variable
 
 ---
 class: font130
@@ -863,10 +846,10 @@ class: font160
 Suggested Citation:
 
 ```{r, engine='out', eval = FALSE}
-@misc{deerdsms2023,
+@misc{deerdsms2024,
       title={"Digital and Social Media Strategies: Field Experiments"},
       author={Lachlan Deer},
-      year={2023},
+      year={2024},
       url = "https://github.com/deer-marketing-lab/dsms-lecture-experiments"
 }
 ```
