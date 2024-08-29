@@ -21,7 +21,7 @@ class: font160
 * Identify and explain the key features of field experiments
 * Discuss how field experiments allow marketers to make causal claims about their marketing intervention 
 * Compute descriptive statistics and visualize data from a field experiment 
-* Use statistical hypothesis testing to analyze experimental data and answer a strategic question
+* Use statistical hypothesis testing to analyze data from a field experiment to answer a strategic question of relevance to managers
 
 ---
 class: inverse, center, middle
@@ -55,50 +55,15 @@ class: font160
 
 **Today**: **Intro to Field Experiments** 
 
-* What are they? Why we run them? How to analyse the data?
-* Abstract away from Digital Markets for generalizability
+* Conceptual: What are they? Why we run them? How to analyse the data?
+* Application: Search Ranking Experiment at Expedia
 
 *Next Week*: Experiments with Online Display Advertising & Search Engine Marketing
 
 ---
-# Wasteful Advertising Expenditures? 
-
-```{r, echo = FALSE, fig.align = "center", out.width="100%"}
-url <- "figs/wannamaker.png"
-knitr::include_graphics(url)
-```
-
-.right[
-Source: [Papergreat Blog](http://www.papergreat.com/2012/09/saturdays-postcard-wanamakers-and-1911.html)
-]
-
----
-class: font150
-# Measuring Advertising Response
-
-`r icons:::icon_style(icons::fontawesome("bullseye", style = "solid"), scale = 1)`
-**The goal of any marketing campaign is to increase sales** 
-
-* Either short-term or long-term
-
-`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
-**How to evaluate the performance of marketing?**
-
-Each campaign / channel is evaluated on incremental profit that it produces relative to its cost 
-
-$$
-ROI = \frac{\text{incremental profit due to advertising} - \text{cost of advertising}}{\text{cost of advertising}}
-$$
-
-`r icons:::icon_style(icons::academicons("open-data"), scale = 1)` Our challenge so far: **incrementality**
-
-* Is what we have estimated so far the 'true' effect of advertising?
-
-
----
 class: inverse, center, middle
 
-# The Burger Promotion Problem
+# Hypothetical Scenario: <br> The Burger Promotion Problem
 
 ---
 class: font150
@@ -230,6 +195,8 @@ knitr::include_graphics(url)
 
 .center[along with the observation/measurement of an outcome variable]
 
+Remark: Experiments are often also called A/B tests or A/B/n tests in marketing and data science.
+
 ---
 class: font150
 # Field Experiments 
@@ -246,7 +213,7 @@ Key features of a field experiment:
 
 <br>
 
-In most field experiments, participants are not even conscious of taking part in an experiment
+In most field experiments, participants are not even conscious that they are taking part in an experiment
 
 ---
 class: font150
@@ -265,7 +232,7 @@ Three identifiable aspects:
 
 .font70[Dunning, T. (2012). Natural experiments in the social sciences: A design-based approach. Cambridge: Cambridge University Press.]
 
-When done correctly: isolates the **incremental effect** of the treatment on a outcome variable
+When done correctly: **isolates the incremental effect** of the treatment on a outcome variable
 
 ---
 class: font130
@@ -285,7 +252,7 @@ class: font130
 7. Conclude whether to reject or "fail to reject" your hypothesis based on (7).
 
 
-* Good experiments have a hypothesis that answers a **strategic question** for a business
+.font80[Remark: Good experiments have a hypothesis that answers a strategic question for a business]
 
 ---
 class: font150
@@ -305,19 +272,6 @@ knitr::include_graphics(url)
 class: clear
 
 ---
-class: font140
-# Causation and the Rise of Experiments
-
-> **Experiment**: statistical test where a hypothesis is subjected to data produced by a specific procedure in which some variable thought to affect an outcome is deliberately manipulated
-
-Overcomes:
-
-1. Lurking Variables: All lurking variables are uncorrelated with the experiment
-2. Selection Bias: Analyst chooses the sample to match the population of interest
-
-Remark: Experiments are often also called A/B tests or A/B/n tests.
-
----
 class: font150
 # Causal Data Driven Marketing Redux
 
@@ -335,28 +289,6 @@ class: font150
 `r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
 **How have field experiments helped us do causal data driven marketing?**
 ]
-
----
-# Most Experiments Fail
-
-**Main Point of an experiment**:  test some idea 
-
-* *not* proven something 
-
-$\implies$ most experiments "fail"
-
-* i.e. change does not lead to an improvement
-
-**This is a good thing**
-
-* Bad ideas fail quickly
-* Investment is typically small ...
-* ... as are the sample sizes
-
-But failed experiments are not normally what one sees ...
-
-* In publications, or 
-* When talking to a firm 
 
 ---
 class: inverse, center, middle
@@ -413,11 +345,27 @@ class: font160
 <br>
 
 
-1. Build an understanding of the data structure 
+1. Be explicit on the business question you are trying to answer 
+2. Build an understanding of the data structure 
 2. Compute some descriptive statistics 
 3. Visualize the Data
 4. Run (the correct) statistical test
-5. (Use test results to inform decision making)
+5. Use the results to inform decision making
+
+---
+class: font160
+# The Business Question(s)
+
+How to go from:
+
+.center[
+**Does their ranking algorithm outperform random ordering?**
+]
+
+to something we can measure ... 
+
+
+
 
 ---
 class: font160
@@ -564,7 +512,7 @@ class: font160
 
 ---
 class: font160
-# Comparing Proportions - Two Alternatives
+# Comparing Proportions
 
 Form null and alternative hypotheses:
 
@@ -610,13 +558,17 @@ In experiments at large tech companies usually $\beta = 0.8$
 
 
 ---
-class: font160
-# Comparing Means - Two Alternatives
+class: font140
+# Comparing Means
 
 .center[
 `r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
- *Is click behaviour different between treatments?**
+ **Is click behaviour different between treatments?**
 ]
+
+Click behaviour $\rightarrow$ number of clicks 
+
+* .font70[Other ideas likely valid too]
 
 Form null and alternative hypotheses:
 
@@ -646,6 +598,9 @@ t_test(sessions_data, hotels_viewed ~ treatment, alternative = "two.sided")
 
 `r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
 **How to interpret the output?**
+
+---
+# What have we discovered so far?
 
 ---
 class: font120
@@ -697,6 +652,31 @@ Regression estimates from experiments allow us to:
   * Which our t-test and ANOVA didn't
 
 ---
+class: font160
+# What could be the mechanism?
+
+.center[
+`r icons:::icon_style(icons::fontawesome("question", style = "solid"), scale = 1)`
+ **Why does Expedia's search ranking do better?**
+]
+
+---
+class: font160
+# What could be the mechanism?
+
+Focus on sessions with a booking. How do the characteristics differ?
+
+
+```{r, echo = FALSE, fig.align = "center", out.width="100%"}
+url <- "figs/booking_characteristics.png"
+knitr::include_graphics(url)
+```
+
+Takeaways:
+
+
+
+---
 class: inverse, center, middle
 
 # Recap
@@ -723,6 +703,29 @@ class: font160
 5. Support with analysis
 6. Use graphs 
 7. Check the (graph) labels!
+
+---
+# Most Experiments Fail
+
+**Main Point of an experiment**:  test some idea 
+
+* *not* proven something 
+
+$\implies$ most experiments "fail"
+
+* i.e. change does not lead to an improvement
+
+**This is a good thing**
+
+* Bad ideas fail quickly
+* Investment is typically small ...
+* ... as are the sample sizes
+
+But failed experiments are not normally what one sees ...
+
+* In publications, or 
+* When talking to a firm 
+
 
 ---
 # License & Citation

@@ -46,7 +46,7 @@ search_data %>%
     group_by(srch_id, treatment) %>%
     count() %>%
     group_by(treatment) %>%
-    count ()
+    count()
 
 # booking made
 # --- Aggregate the Data --- #
