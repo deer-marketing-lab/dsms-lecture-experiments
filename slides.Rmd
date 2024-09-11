@@ -58,7 +58,7 @@ class: font160
 * Conceptual: What are they? Why we run them? How to analyse the data?
 * Application: Search Ranking Experiment at Expedia
 
-*Next Week*: Experiments with Online Display Advertising & Search Engine Marketing
+*Next Week*: Experiments in Online Display Advertising & Search Engine Marketing
 
 ---
 class: inverse, center, middle
