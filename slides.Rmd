@@ -33,7 +33,7 @@ class: font160
 # Where Are We Now? 
 
 ```{r, echo = FALSE, fig.align = "center", out.width="25%"}
-url <- "https://png.pngtree.com/png-clipart/20211024/original/pngtree-pile-of-cartoonish-cute-doodle-theme-books-png-image_6871556.png"
+url <- "figs/pngtree-pile-of-cartoonish-cute-doodle-theme-books-png-image_6871556.png"
 knitr::include_graphics(url)
 ```
 
