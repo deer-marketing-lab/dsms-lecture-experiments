@@ -11,3 +11,4 @@ slides_files
 *.html
 *.pdf
 slides_cache*
+expedia_example/*
